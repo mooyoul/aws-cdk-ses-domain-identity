@@ -1,0 +1,38 @@
+name: workflow
+on: [push, pull_request]
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - name: Lint (Module)
+        run: npm run lint
+      - name: Build (Module)
+        run: npm run build
+      - name: Test (Module)
+        run: npm test
+      - name: Lint (Lambda Package)
+        working-directory: lambda-packages/dns-validated-domain-identity-handler
+        run: npm run lint
+      - name: Build (Lambda Package)
+        working-directory: lambda-packages/dns-validated-domain-identity-handler
+        run: npm run build
+      - name: Test (Lambda Package)
+        working-directory: lambda-packages/dns-validated-domain-identity-handler
+        run: npm test
+      - name: Publish
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+        run: npx semantic-release
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Upload Test Artifacts
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: outputs
+          path: output
