@@ -9,6 +9,11 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
+      - name: Setup (Module)
+        run: npm ci
+      - name: Setup (Lambda Package)
+        working-directory: lambda-packages/dns-validated-domain-identity-handler
+        run: npm ci
       - name: Lint (Module)
         run: npm run lint
       - name: Build (Module)
@@ -30,9 +35,3 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      - name: Upload Test Artifacts
-        uses: actions/upload-artifact@v2
-        if: always()
-        with:
-          name: outputs
-          path: output
