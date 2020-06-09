@@ -16,16 +16,16 @@ jobs:
         run: npm ci
       - name: Lint (Module)
         run: npm run lint
-      - name: Build (Module)
-        run: npm run build
-      - name: Test (Module)
-        run: npm test
       - name: Lint (Lambda Package)
         working-directory: lambda-packages/dns-validated-domain-identity-handler
         run: npm run lint
+      - name: Build (Module)
+        run: npm run build
       - name: Build (Lambda Package)
         working-directory: lambda-packages/dns-validated-domain-identity-handler
         run: npm run build
+      - name: Test (Module)
+        run: npm test
       - name: Test (Lambda Package)
         working-directory: lambda-packages/dns-validated-domain-identity-handler
         run: npm test
