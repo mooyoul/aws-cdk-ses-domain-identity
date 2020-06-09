@@ -1,0 +1,74 @@
+{
+  "name": "aws-cdk-ses-domain-identity",
+  "version": "1.0.0",
+  "description": "Constructs for provisioning and referencing domain identities which can be used in SES RuleSets and Actions Construct.",
+  "main": "dist/dns-validated-domain-identity.js",
+  "types": "types/dns-validated-domain-identity.d.ts",
+  "dependencies": {},
+  "peerDependencies": {
+    "@aws-cdk/aws-iam": "0.0.0",
+    "@aws-cdk/aws-lambda": "0.0.0",
+    "@aws-cdk/aws-route53": "0.0.0",
+    "@aws-cdk/core": "0.0.0",
+    "constructs": "^3.0.2"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.42.1",
+    "@aws-cdk/aws-iam": "1.42.1",
+    "@aws-cdk/aws-lambda": "1.42.1",
+    "@aws-cdk/aws-route53": "1.42.1",
+    "@aws-cdk/core": "1.42.1",
+    "@prescott/commitlint-preset": "1.0.0",
+    "@prescott/semantic-release-config": "1.0.0",
+    "@prescott/tslint-preset": "1.0.0",
+    "@types/jest": "25.2.3",
+    "@types/node": "12.12.43",
+    "husky": "4.2.5",
+    "jest": "26.0.1",
+    "semantic-release": "17.0.7",
+    "ts-jest": "26.1.0",
+    "ts-node": "8.10.2",
+    "tslint": "6.1.2",
+    "typescript": "3.9.3"
+  },
+  "scripts": {
+    "clean": "rm -rf dist",
+    "prebuild": "npm run clean",
+    "build": "tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build && cd lambda-packages/dns-validated-domain-identity-handler && npm run build",
+    "test": "jest",
+    "lint": "tslint -c tslint.json '{src,test}/**/*.ts'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mooyoul/aws-cdk-ses-domain-identity.git"
+  },
+  "keywords": [
+    "aws",
+    "aws-cdk",
+    "aws-cdk-construct",
+    "aws-ses",
+    "ses"
+  ],
+  "author": "MooYeol Prescott Lee <mooyoul@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mooyoul/aws-cdk-ses-domain-identity/issues"
+  },
+  "homepage": "https://github.com/mooyoul/aws-cdk-ses-domain-identity#readme",
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@prescott/commitlint-preset"
+    ]
+  }
+}

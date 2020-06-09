@@ -1,0 +1,7 @@
+{
+  "extends": [
+    "@prescott",
+    "@prescott:nodejs12",
+    "@prescott:semantic-commit"
+  ]
+}
