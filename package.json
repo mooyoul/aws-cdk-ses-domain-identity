@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Constructs for provisioning and referencing domain identities which can be used in SES RuleSets and Actions Construct.",
   "main": "dist/dns-validated-domain-identity.js",
-  "types": "types/dns-validated-domain-identity.d.ts",
+  "types": "dist/dns-validated-domain-identity.d.ts",
   "dependencies": {},
   "peerDependencies": {
     "@aws-cdk/aws-iam": "0.0.0",
