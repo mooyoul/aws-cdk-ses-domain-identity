@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.0...v1.0.1) (2020-06-12)
+
+
+### Bug Fixes
+
+* **iam:** add addtional required SES IAM actions ([ca41f94](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/ca41f94e62e2a271e367d748be8b0c5a8efce882))
+* **typing:** fix broken types location ([9162f52](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/9162f52793ee45e78dc09f9804f12eb315859322))
+
 # 1.0.0 (2020-06-09)
 
 
