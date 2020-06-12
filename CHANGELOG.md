@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.1...v1.0.2) (2020-06-12)
+
+
+### Bug Fixes
+
+* **deps:** fix invalid CDK version in peer dependency list ([85e7d96](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/85e7d969ca06eac696349a2fa6b7d88ed53ffeca))
+
 ## [1.0.1](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.0...v1.0.1) (2020-06-12)
 
 
