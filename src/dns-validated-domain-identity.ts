@@ -76,7 +76,14 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
       role: props.customResourceRole,
     });
     requestorFunction.addToRolePolicy(new iam.PolicyStatement({
-      actions: ["ses:VerifyDomainIdentity", "ses:VerifyDomainDkim", "ses:ListIdentities", "ses:DeleteIdentity"],
+      actions: [
+        "ses:GetIdentityMailFromDomainAttributes",
+        "ses:GetIdentityDkimAttributes",
+        "ses:VerifyDomainIdentity",
+        "ses:VerifyDomainDkim",
+        "ses:ListIdentities",
+        "ses:DeleteIdentity",
+      ],
       resources: ["*"],
     }));
     requestorFunction.addToRolePolicy(new iam.PolicyStatement({
