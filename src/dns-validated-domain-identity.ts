@@ -77,7 +77,7 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
     });
     requestorFunction.addToRolePolicy(new iam.PolicyStatement({
       actions: [
-        "ses:GetIdentityMailFromDomainAttributes",
+        "ses:GetIdentityVerificationAttributes",
         "ses:GetIdentityDkimAttributes",
         "ses:VerifyDomainIdentity",
         "ses:VerifyDomainDkim",
