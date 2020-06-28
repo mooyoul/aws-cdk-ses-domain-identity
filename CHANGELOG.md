@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.2...v1.0.3) (2020-06-28)
+
+
+### Bug Fixes
+
+* **iam:** fix invalid IAM action name for querying SES Domain Validation ([d693380](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/d693380dab2f83c9906e2e9922ab9539f0434c7e))
+
 ## [1.0.2](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.1...v1.0.2) (2020-06-12)
 
 
