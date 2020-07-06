@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.3...v1.0.4) (2020-07-06)
+
+
+### Bug Fixes
+
+* **iam:** fix missing IAM action for setting DKIM enabled ([ec9325f](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/ec9325ffc27d874128bd4e6a4b7aea6d224daad5))
+
 ## [1.0.3](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.2...v1.0.3) (2020-06-28)
 
 
