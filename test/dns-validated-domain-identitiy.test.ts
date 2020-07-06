@@ -51,6 +51,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
             Action: [
               "ses:GetIdentityVerificationAttributes",
               "ses:GetIdentityDkimAttributes",
+              "ses:SetIdentityDkimEnabled",
               "ses:VerifyDomainIdentity",
               "ses:VerifyDomainDkim",
               "ses:ListIdentities",
