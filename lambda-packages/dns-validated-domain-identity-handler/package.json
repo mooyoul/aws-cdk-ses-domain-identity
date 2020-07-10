@@ -7,7 +7,7 @@
   "dependencies": {},
   "devDependencies": {
     "@prescott/tslint-preset": "1.0.0",
-    "@types/aws-lambda": "8.10.58",
+    "@types/aws-lambda": "8.10.59",
     "@types/jest": "26.0.4",
     "@types/nock": "11.1.0",
     "@types/node": "12.12.49",
