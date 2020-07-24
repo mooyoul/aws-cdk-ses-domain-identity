@@ -20,7 +20,7 @@
     "@prescott/commitlint-preset": "1.0.1",
     "@prescott/semantic-release-config": "1.0.0",
     "@prescott/tslint-preset": "1.0.0",
-    "@types/jest": "26.0.6",
+    "@types/jest": "26.0.7",
     "@types/node": "12.12.52",
     "husky": "4.2.5",
     "jest": "26.1.0",
