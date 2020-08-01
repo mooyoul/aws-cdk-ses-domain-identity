@@ -12,7 +12,7 @@
     "@types/nock": "11.1.0",
     "@types/node": "12.12.53",
     "@types/sinon": "9.0.4",
-    "aws-sdk": "2.720.0",
+    "aws-sdk": "2.725.0",
     "jest": "26.2.2",
     "nock": "13.0.3",
     "sinon": "9.0.2",
