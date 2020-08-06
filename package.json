@@ -21,7 +21,7 @@
     "@prescott/semantic-release-config": "1.0.0",
     "@prescott/tslint-preset": "1.0.0",
     "@types/jest": "26.0.9",
-    "@types/node": "12.12.53",
+    "@types/node": "12.12.54",
     "husky": "4.2.5",
     "jest": "26.2.2",
     "semantic-release": "17.1.1",
