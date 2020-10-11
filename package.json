@@ -23,7 +23,7 @@
     "@types/jest": "26.0.14",
     "@types/node": "12.12.67",
     "husky": "4.3.0",
-    "jest": "26.5.2",
+    "jest": "26.5.3",
     "semantic-release": "17.1.2",
     "ts-jest": "26.4.1",
     "ts-node": "8.10.2",
