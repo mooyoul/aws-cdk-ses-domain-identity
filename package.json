@@ -24,7 +24,7 @@
     "@types/node": "12.19.3",
     "husky": "4.3.0",
     "jest": "26.6.1",
-    "semantic-release": "17.2.1",
+    "semantic-release": "17.2.2",
     "ts-jest": "26.4.3",
     "ts-node": "8.10.2",
     "tslint": "6.1.3",
