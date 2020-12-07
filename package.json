@@ -22,7 +22,7 @@
     "@prescott/tslint-preset": "1.0.1",
     "@types/jest": "26.0.16",
     "@types/node": "12.19.8",
-    "husky": "4.3.4",
+    "husky": "4.3.5",
     "jest": "26.6.3",
     "semantic-release": "17.3.0",
     "ts-jest": "26.4.4",
