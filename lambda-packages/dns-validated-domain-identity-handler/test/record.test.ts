@@ -69,6 +69,10 @@ describe(Record.name, () => {
         ResourceRecordSet: {
           Name: "example.com",
           Type: "CNAME",
+          TTL: 1234,
+          ResourceRecords: [
+            { Value: "target.example.com" },
+          ],
         },
       });
     });
