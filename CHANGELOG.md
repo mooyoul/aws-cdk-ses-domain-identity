@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.4...v1.0.5) (2021-05-08)
+
+
+### Bug Fixes
+
+* **delete-record:** removing the ommitting of required parameters from DELETE record ([#16](https://github.com/mooyoul/aws-cdk-ses-domain-identity/issues/16)) ([af62caa](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/af62caabe18b36f7f5f2bca1b1c1e7ac96c080b3))
+
 ## [1.0.4](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.3...v1.0.4) (2020-07-06)
 
 
