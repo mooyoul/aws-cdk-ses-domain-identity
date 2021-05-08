@@ -179,6 +179,10 @@ describe(Verifier.name, () => {
             ResourceRecordSet: {
               Name: "_amazonses.example.com",
               Type: "TXT",
+              TTL: 1800,
+              ResourceRecords: [
+                { Value: "\"token\"" },
+              ],
             },
           }],
         },
@@ -395,18 +399,30 @@ describe(Verifier.name, () => {
             ResourceRecordSet: {
               Name: "foo._domainkey.example.com",
               Type: "CNAME",
+              TTL: 1800,
+              ResourceRecords: [
+                { Value: "foo.dkim.amazonses.com"},
+              ],
             },
           }, {
             Action: "DELETE",
             ResourceRecordSet: {
               Name: "bar._domainkey.example.com",
               Type: "CNAME",
+              TTL: 1800,
+              ResourceRecords: [
+                { Value: "bar.dkim.amazonses.com"},
+              ],
             },
           }, {
             Action: "DELETE",
             ResourceRecordSet: {
               Name: "baz._domainkey.example.com",
               Type: "CNAME",
+              TTL: 1800,
+              ResourceRecords: [
+                { Value: "baz.dkim.amazonses.com"},
+              ],
             },
           }],
         },

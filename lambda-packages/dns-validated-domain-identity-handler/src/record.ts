@@ -19,26 +19,16 @@ export class Record {
   ) {}
 
   public action(type: "CREATE" | "UPSERT" | "DELETE"): Change {
-    if (type === "DELETE") {
-      return {
-        Action: "DELETE",
-        ResourceRecordSet: {
-          Name: this.name,
-          Type: this.type,
-        },
-      };
-    } else {
-      return {
-        Action: type,
-        ResourceRecordSet: {
-          Name: this.name,
-          Type: this.type,
-          ResourceRecords: [{
-            Value: this.value,
-          }],
-          TTL: this.ttl,
-        },
-      };
-    }
+    return {
+      Action: type,
+      ResourceRecordSet: {
+        Name: this.name,
+        Type: this.type,
+        ResourceRecords: [{
+          Value: this.value,
+        }],
+        TTL: this.ttl,
+      },
+    };
   }
 }
