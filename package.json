@@ -12,11 +12,11 @@
     "@aws-cdk/core": "^1.45.0 || ^1.98.0"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.105.0",
-    "@aws-cdk/aws-iam": "1.105.0",
-    "@aws-cdk/aws-lambda": "1.105.0",
-    "@aws-cdk/aws-route53": "1.105.0",
-    "@aws-cdk/core": "1.105.0",
+    "@aws-cdk/assert": "1.106.0",
+    "@aws-cdk/aws-iam": "1.106.0",
+    "@aws-cdk/aws-lambda": "1.106.0",
+    "@aws-cdk/aws-route53": "1.106.0",
+    "@aws-cdk/core": "1.106.0",
     "@prescott/commitlint-preset": "1.0.2",
     "@prescott/semantic-release-config": "1.0.1",
     "@prescott/tslint-preset": "1.0.1",
