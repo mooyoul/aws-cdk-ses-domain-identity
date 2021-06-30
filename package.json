@@ -17,7 +17,7 @@
     "@aws-cdk/aws-lambda": "1.110.1",
     "@aws-cdk/aws-route53": "1.110.1",
     "@aws-cdk/core": "1.110.1",
-    "@prescott/commitlint-preset": "1.0.2",
+    "@prescott/commitlint-preset": "1.0.3",
     "@prescott/semantic-release-config": "1.0.1",
     "@prescott/tslint-preset": "1.0.1",
     "@types/jest": "26.0.23",
