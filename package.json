@@ -23,9 +23,9 @@
     "@types/jest": "26.0.23",
     "@types/node": "12.20.15",
     "husky": "7.0.0",
-    "jest": "26.6.3",
+    "jest": "27.0.6",
     "semantic-release": "17.4.4",
-    "ts-jest": "26.5.6",
+    "ts-jest": "27.0.3",
     "ts-node": "10.0.0",
     "tslint": "6.1.3",
     "typescript": "4.3.5"
