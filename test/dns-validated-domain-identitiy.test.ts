@@ -66,7 +66,10 @@ describe(DnsValidatedDomainIdentity.name, () => {
             Resource: "*",
           },
           {
-            Action: "route53:changeResourceRecordSets",
+            Action: [
+              "route53:changeResourceRecordSets",
+              "route53:ListResourceRecordSets",
+            ],
             Effect: "Allow",
             Resource: {
               "Fn::Join": [
