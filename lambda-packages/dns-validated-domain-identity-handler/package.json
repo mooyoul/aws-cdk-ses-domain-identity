@@ -10,7 +10,7 @@
     "@types/aws-lambda": "8.10.83",
     "@types/jest": "27.0.1",
     "@types/nock": "11.1.0",
-    "@types/node": "12.20.24",
+    "@types/node": "12.20.25",
     "@types/sinon": "10.0.2",
     "aws-sdk": "2.987.0",
     "jest": "27.2.0",
