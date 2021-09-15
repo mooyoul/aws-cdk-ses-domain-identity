@@ -1,4 +1,4 @@
-import {Change, ResourceRecord} from "aws-sdk/clients/route53";
+import { Change, ResourceRecord } from "aws-sdk/clients/route53";
 
 const DEFAULT_VERIFICATION_RECORD_TTL = 1800; // 30 minutes
 
