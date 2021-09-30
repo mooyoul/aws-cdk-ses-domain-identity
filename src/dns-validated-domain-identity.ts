@@ -92,7 +92,10 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
       resources: ["*"],
     }));
     requestorFunction.addToRolePolicy(new iam.PolicyStatement({
-      actions: ["route53:changeResourceRecordSets"],
+      actions: [
+          "route53:changeResourceRecordSets",
+          "route53:ListResourceRecordSets",
+      ],
       resources: [`arn:${cdk.Stack.of(requestorFunction).partition}:route53:::hostedzone/${this.hostedZoneId}`],
     }));
 

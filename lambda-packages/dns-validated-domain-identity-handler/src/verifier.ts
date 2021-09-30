@@ -30,12 +30,28 @@ export class Verifier {
   ) {}
 
   public async verifyIdentity(upsert: boolean = false) {
+
+    const existingTxtRecord = await this.getCurrentTXTRecord();
+    const values: Route53.ResourceRecord[] = existingTxtRecord?.ResourceRecords || [];
+
     console.log("Verifying Domain for %s", this.domainName);
     const identityToken = await this.requestIdentityToken();
 
-    console.log("Creating a TXT record for verifying domain into zone %s", this.hostedZoneId);
+    // If the validation token is not in the record, add it.
+    if (!values.find((record) => record.Value === `"${identityToken}"`)) {
+      values.push({
+        Value: `"${identityToken}"`,
+      });
+    }
+
+    if (existingTxtRecord) {
+      console.log("Found existing TXT record, adding value to verify domain in zone %s", this.hostedZoneId);
+    } else {
+      console.log("Creating a TXT record for verifying domain into zone %s", this.hostedZoneId);
+    }
+
     const changeId = await this.changeRecords([
-      Record.forIdentity(this.domainName, identityToken).action(upsert ? "UPSERT" : "CREATE"),
+      Record.forIdentity(this.domainName, values).action(existingTxtRecord || upsert ? "UPSERT" : "CREATE"),
     ]);
 
     console.log("Waiting for DNS records to commit...");
@@ -70,10 +86,24 @@ export class Verifier {
       Identity: this.domainName,
     }).promise();
 
-    console.log("Deleting DNS Records used for domain verification...");
-    await this.changeRecords([
-      Record.forIdentity(this.domainName, identity.token!).action("DELETE"),
-    ]);
+    const existingTxtRecord = await this.getCurrentTXTRecord();
+    const existingTxtValues: Route53.ResourceRecord[] = existingTxtRecord?.ResourceRecords || [];
+    const newTxtValues: Route53.ResourceRecord[] = existingTxtValues.filter((record) => record.Value !== `"${identity.token}"`);
+
+    // If the record contained only the validation value, delete the record.
+    // Otherwise just update the record with the value removed.
+    if (newTxtValues.length === 0) {
+      console.log("Deleting DNS Records used for domain verification...");
+      await this.changeRecords([
+        Record.forIdentity(this.domainName, existingTxtValues).action("DELETE"),
+      ]);
+    } else {
+      console.log("Updating DNS Records to remove the value used for domain verification...");
+      await this.changeRecords([
+        Record.forIdentity(this.domainName, newTxtValues).action("UPSERT"),
+      ]);
+    }
+
   }
 
   public async disableDKIM() {
@@ -153,6 +183,16 @@ export class Verifier {
       status: attr.DkimVerificationStatus,
       tokens: attr.DkimTokens || [],
     };
+  }
+
+  private async getCurrentTXTRecord(): Promise<Route53.ResourceRecordSet | undefined> {
+    const res = await this.route53.listResourceRecordSets({
+      HostedZoneId: this.hostedZoneId,
+    }).promise();
+
+    return res.ResourceRecordSets.find((set) => {
+      return set.Name === `_amazonses.${this.domainName}.`;
+    });
   }
 
   private async waitForRecordChange(

@@ -32,6 +32,7 @@ describe(Verifier.name, () => {
   describe("#verifyIdentity", () => {
     let verifyDomainIdentityFake: sinon.SinonSpy;
     let changeResourceRecordSetsFake: sinon.SinonSpy;
+    let listResourceRecordSetsFake: sinon.SinonSpy;
     let waitForResourceRecordSetsChangedFake: sinon.SinonSpy;
     let waitForIdentityExistsFake: sinon.SinonSpy;
 
@@ -44,6 +45,12 @@ describe(Verifier.name, () => {
         ChangeInfo: {
           Id: "fake-id",
         },
+      });
+
+      listResourceRecordSetsFake = sinon.fake.resolves({
+        ResourceRecordSets: [], // No records found
+        IsTruncated: false,
+        MaxItems: "100",
       });
 
       waitForResourceRecordSetsChangedFake = sinon.fake.resolves({
@@ -64,6 +71,7 @@ describe(Verifier.name, () => {
 
       stubAWSAPI(SES, "verifyDomainIdentity", verifyDomainIdentityFake);
       stubAWSAPI(Route53, "changeResourceRecordSets", changeResourceRecordSetsFake);
+      stubAWSAPI(Route53, "listResourceRecordSets", listResourceRecordSetsFake);
       stubAWSAPI(Route53, "waitFor", waitForResourceRecordSetsChangedFake);
       stubAWSAPI(SES, "waitFor", waitForIdentityExistsFake);
     });
@@ -132,6 +140,7 @@ describe(Verifier.name, () => {
     let getIdentityVerificationAttributesFake: sinon.SinonStub;
     let deleteIdentityFake: sinon.SinonSpy;
     let changeResourceRecordSetsFake: sinon.SinonSpy;
+    let listResourceRecordSetsFake: sinon.SinonSpy;
 
     beforeEach(() => {
       getIdentityVerificationAttributesFake = sinon.stub();
@@ -152,9 +161,16 @@ describe(Verifier.name, () => {
         },
       });
 
+      listResourceRecordSetsFake = sinon.fake.resolves({
+        ResourceRecordSets: [], // No records
+        IsTruncated: false,
+        MaxItems: "100",
+      });
+
       stubAWSAPI(SES, "getIdentityVerificationAttributes", getIdentityVerificationAttributesFake);
       stubAWSAPI(SES, "deleteIdentity", deleteIdentityFake);
       stubAWSAPI(Route53, "changeResourceRecordSets", changeResourceRecordSetsFake);
+      stubAWSAPI(Route53, "listResourceRecordSets", listResourceRecordSetsFake);
     });
 
     it("should delete identity and delete route53 record", async () => {
@@ -180,9 +196,7 @@ describe(Verifier.name, () => {
               Name: "_amazonses.example.com",
               Type: "TXT",
               TTL: 1800,
-              ResourceRecords: [
-                { Value: "\"token\"" },
-              ],
+              ResourceRecords: [],
             },
           }],
         },
