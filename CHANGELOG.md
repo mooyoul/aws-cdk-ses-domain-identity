@@ -1,3 +1,11 @@
+## [1.0.6](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.5...v1.0.6) (2021-09-30)
+
+
+### Bug Fixes
+
+* refactor [#30](https://github.com/mooyoul/aws-cdk-ses-domain-identity/issues/30) with FQDN usage for Route53 record name ([ace6085](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/ace6085456b9740bf5e2faa4d6e1d2d6218a0c24))
+* respect existing TXT records ([#31](https://github.com/mooyoul/aws-cdk-ses-domain-identity/issues/31)) ([8635dda](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/8635ddaab94c2e83cbfae344b9403050b6356688))
+
 ## [1.0.5](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.4...v1.0.5) (2021-05-08)
 
 
