@@ -3,12 +3,12 @@ import { Record } from "../src/record";
 describe(Record.name, () => {
   describe("static #forIdentity", () => {
     it("should return a new instance of Record", () => {
-      const value = Record.forIdentity("example.com", [{Value:"token"}]);
+      const value = Record.forIdentity("example.com", ["token"]);
       expect(value).toBeInstanceOf(Record);
       expect(value).toMatchObject({
-        name: "_amazonses.example.com",
+        name: "_amazonses.example.com.",
         type: "TXT",
-        records: [{ Value: "token" }],
+        values: new Set(["token"]),
         ttl: 1800,
       });
     });
@@ -19,9 +19,9 @@ describe(Record.name, () => {
       const value = Record.forDKIM("example.com", "token");
       expect(value).toBeInstanceOf(Record);
       expect(value).toMatchObject({
-        name: "token._domainkey.example.com",
+        name: "token._domainkey.example.com.",
         type: "CNAME",
-        records: [{ Value: "token.dkim.amazonses.com" }],
+        values: new Set(["token.dkim.amazonses.com"]),
         ttl: 1800,
       });
     });
@@ -34,7 +34,7 @@ describe(Record.name, () => {
       record = new Record(
         "example.com",
         "CNAME",
-          [{ Value: "target.example.com" }],
+        new Set(["target.example.com"]),
         1234,
       );
     });

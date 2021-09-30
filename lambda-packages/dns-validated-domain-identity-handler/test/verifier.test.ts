@@ -92,7 +92,7 @@ describe(Verifier.name, () => {
           Changes: [{
             Action: "CREATE",
             ResourceRecordSet: {
-              Name: "_amazonses.example.com",
+              Name: "_amazonses.example.com.",
               Type: "TXT",
               ResourceRecords: [{
                 Value: `"token"`,
@@ -123,7 +123,7 @@ describe(Verifier.name, () => {
           Changes: [{
             Action: "UPSERT",
             ResourceRecordSet: {
-              Name: "_amazonses.example.com",
+              Name: "_amazonses.example.com.",
               Type: "TXT",
               ResourceRecords: [{
                 Value: `"token"`,
@@ -162,7 +162,13 @@ describe(Verifier.name, () => {
       });
 
       listResourceRecordSetsFake = sinon.fake.resolves({
-        ResourceRecordSets: [], // No records
+        ResourceRecordSets: [{
+          Name: "_amazonses.example.com.",
+          Type: "TXT",
+          ResourceRecords: [{
+            Value: "\"token\"",
+          }],
+        }],
         IsTruncated: false,
         MaxItems: "100",
       });
@@ -193,7 +199,7 @@ describe(Verifier.name, () => {
           Changes: [{
             Action: "DELETE",
             ResourceRecordSet: {
-              Name: "_amazonses.example.com",
+              Name: "_amazonses.example.com.",
               Type: "TXT",
               TTL: 1800,
               ResourceRecords: [],
@@ -269,7 +275,7 @@ describe(Verifier.name, () => {
           Changes: [{
             Action: "CREATE",
             ResourceRecordSet: {
-              Name: "foo._domainkey.example.com",
+              Name: "foo._domainkey.example.com.",
               Type: "CNAME",
               ResourceRecords: [{
                 Value: "foo.dkim.amazonses.com",
@@ -279,7 +285,7 @@ describe(Verifier.name, () => {
           }, {
             Action: "CREATE",
             ResourceRecordSet: {
-              Name: "bar._domainkey.example.com",
+              Name: "bar._domainkey.example.com.",
               Type: "CNAME",
               ResourceRecords: [{
                 Value: "bar.dkim.amazonses.com",
@@ -289,7 +295,7 @@ describe(Verifier.name, () => {
           }, {
             Action: "CREATE",
             ResourceRecordSet: {
-              Name: "baz._domainkey.example.com",
+              Name: "baz._domainkey.example.com.",
               Type: "CNAME",
               ResourceRecords: [{
                 Value: "baz.dkim.amazonses.com",
@@ -320,7 +326,7 @@ describe(Verifier.name, () => {
           Changes: [{
             Action: "UPSERT",
             ResourceRecordSet: {
-              Name: "foo._domainkey.example.com",
+              Name: "foo._domainkey.example.com.",
               Type: "CNAME",
               ResourceRecords: [{
                 Value: "foo.dkim.amazonses.com",
@@ -330,7 +336,7 @@ describe(Verifier.name, () => {
           }, {
             Action: "UPSERT",
             ResourceRecordSet: {
-              Name: "bar._domainkey.example.com",
+              Name: "bar._domainkey.example.com.",
               Type: "CNAME",
               ResourceRecords: [{
                 Value: "bar.dkim.amazonses.com",
@@ -340,7 +346,7 @@ describe(Verifier.name, () => {
           }, {
             Action: "UPSERT",
             ResourceRecordSet: {
-              Name: "baz._domainkey.example.com",
+              Name: "baz._domainkey.example.com.",
               Type: "CNAME",
               ResourceRecords: [{
                 Value: "baz.dkim.amazonses.com",
@@ -411,7 +417,7 @@ describe(Verifier.name, () => {
           Changes: [{
             Action: "DELETE",
             ResourceRecordSet: {
-              Name: "foo._domainkey.example.com",
+              Name: "foo._domainkey.example.com.",
               Type: "CNAME",
               TTL: 1800,
               ResourceRecords: [
@@ -421,7 +427,7 @@ describe(Verifier.name, () => {
           }, {
             Action: "DELETE",
             ResourceRecordSet: {
-              Name: "bar._domainkey.example.com",
+              Name: "bar._domainkey.example.com.",
               Type: "CNAME",
               TTL: 1800,
               ResourceRecords: [
@@ -431,7 +437,7 @@ describe(Verifier.name, () => {
           }, {
             Action: "DELETE",
             ResourceRecordSet: {
-              Name: "baz._domainkey.example.com",
+              Name: "baz._domainkey.example.com.",
               Type: "CNAME",
               TTL: 1800,
               ResourceRecords: [

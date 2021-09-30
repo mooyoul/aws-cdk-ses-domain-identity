@@ -30,28 +30,24 @@ export class Verifier {
   ) {}
 
   public async verifyIdentity(upsert: boolean = false) {
-
-    const existingTxtRecord = await this.getCurrentTXTRecord();
-    const values: Route53.ResourceRecord[] = existingTxtRecord?.ResourceRecords || [];
-
     console.log("Verifying Domain for %s", this.domainName);
     const identityToken = await this.requestIdentityToken();
 
-    // If the validation token is not in the record, add it.
-    if (!values.find((record) => record.Value === `"${identityToken}"`)) {
-      values.push({
-        Value: `"${identityToken}"`,
-      });
-    }
+    console.log("Getting current identity record");
+    const currentIdentityRecord = await this.getCurrentIdentityRecord();
 
-    if (existingTxtRecord) {
+    if (currentIdentityRecord) {
       console.log("Found existing TXT record, adding value to verify domain in zone %s", this.hostedZoneId);
     } else {
       console.log("Creating a TXT record for verifying domain into zone %s", this.hostedZoneId);
     }
 
+    const shouldUpsert = currentIdentityRecord || upsert;
+    const record = currentIdentityRecord ?? Record.forIdentity(this.domainName, []);
+    record.add(identityToken);
+
     const changeId = await this.changeRecords([
-      Record.forIdentity(this.domainName, values).action(existingTxtRecord || upsert ? "UPSERT" : "CREATE"),
+      record.action(shouldUpsert ? "UPSERT" : "CREATE"),
     ]);
 
     console.log("Waiting for DNS records to commit...");
@@ -86,21 +82,25 @@ export class Verifier {
       Identity: this.domainName,
     }).promise();
 
-    const existingTxtRecord = await this.getCurrentTXTRecord();
-    const existingTxtValues: Route53.ResourceRecord[] = existingTxtRecord?.ResourceRecords || [];
-    const newTxtValues: Route53.ResourceRecord[] = existingTxtValues.filter((record) => record.Value !== `"${identity.token}"`);
+    const identityRecord = await this.getCurrentIdentityRecord();
+    if (!identityRecord) {
+      console.log("Identity Record does not exist (Maybe drifted?). skipping identity record unprovisioning...");
+      return;
+    }
+
+    identityRecord.remove(identity.token);
 
     // If the record contained only the validation value, delete the record.
     // Otherwise just update the record with the value removed.
-    if (newTxtValues.length === 0) {
+    if (identityRecord.size === 0) {
       console.log("Deleting DNS Records used for domain verification...");
       await this.changeRecords([
-        Record.forIdentity(this.domainName, existingTxtValues).action("DELETE"),
+        identityRecord.action("DELETE"),
       ]);
     } else {
       console.log("Updating DNS Records to remove the value used for domain verification...");
       await this.changeRecords([
-        Record.forIdentity(this.domainName, newTxtValues).action("UPSERT"),
+        identityRecord.action("UPSERT"),
       ]);
     }
 
@@ -185,14 +185,19 @@ export class Verifier {
     };
   }
 
-  private async getCurrentTXTRecord(): Promise<Route53.ResourceRecordSet | undefined> {
+  private async getCurrentIdentityRecord(): Promise<Record | null> {
+    const identity = Record.forIdentity(this.domainName, []);
+
     const res = await this.route53.listResourceRecordSets({
       HostedZoneId: this.hostedZoneId,
+      StartRecordType: identity.type,
+      StartRecordName: identity.name,
     }).promise();
 
-    return res.ResourceRecordSets.find((set) => {
-      return set.Name === `_amazonses.${this.domainName}.`;
-    });
+    const first = res.ResourceRecordSets[0];
+    return first?.Name === identity.name && first?.Type === identity.type
+      ? Record.fromResourceRecordSet(first)
+      : null;
   }
 
   private async waitForRecordChange(
