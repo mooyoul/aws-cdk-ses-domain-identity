@@ -7,16 +7,16 @@
 
 This package provides Constructs for provisioning & validating SES Domain Identity which can be used in SES.
 
-Inspired from [Automatic DNS-validated certificates using Route 53 of `@aws-cdk/aws-certificatemanager` package.](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-certificatemanager-readme.html)
+Inspired from [Automatic DNS-validated certificates using Route 53 of `aws-cdk-lib/aws-certificatemanager` package.](https://docs.aws.amazon.com/cdk/api/latest/docs/aws-certificatemanager-readme.html)
 
-This package automatically validates SES Domain Identity like `@aws-cdk/aws-certificatemanager` does.
+This package automatically validates SES Domain Identity like `aws-cdk-lib/aws-certificatemanager` does.
 
 -----
 
 ## Example
 
 ```typescript
-import * as route53 from "@aws-cdk/aws-route53";
+import * as route53 from "aws-cdk-lib/aws-route53";
 import { DnsValidatedDomainIdentity } from "aws-cdk-ses-domain-identity";
 
 // ... (truncated)

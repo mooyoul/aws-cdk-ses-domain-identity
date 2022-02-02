@@ -1,8 +1,7 @@
-import { expect as expectCDK, haveResource, SynthUtils } from "@aws-cdk/assert";
-import * as iam from "@aws-cdk/aws-iam";
-import { HostedZone, PublicHostedZone } from "@aws-cdk/aws-route53";
-import { App, Stack, Token } from "@aws-cdk/core";
-
+import { App, Stack, Token } from "aws-cdk-lib";
+import {Template} from "aws-cdk-lib/assertions";
+import * as iam from "aws-cdk-lib/aws-iam";
+import { HostedZone, PublicHostedZone } from "aws-cdk-lib/aws-route53";
 import { DnsValidatedDomainIdentity } from "../src/dns-validated-domain-identity";
 
 describe(DnsValidatedDomainIdentity.name, () => {
@@ -19,7 +18,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
       hostedZone: exampleDotComZone,
     });
 
-    expectCDK(stack).to(haveResource("AWS::CloudFormation::CustomResource", {
+    Template.fromStack(stack).hasResourceProperties("AWS::CloudFormation::CustomResource", {
       DomainName: "test.example.com",
       ServiceToken: {
         "Fn::GetAtt": [
@@ -30,14 +29,16 @@ describe(DnsValidatedDomainIdentity.name, () => {
       HostedZoneId: {
         Ref: "ExampleDotCom4D1B83AA",
       },
-    }));
-    expectCDK(stack).to(haveResource("AWS::Lambda::Function", {
+    });
+
+    Template.fromStack(stack).hasResourceProperties("AWS::Lambda::Function", {
       Handler: "index.identityRequestHandler",
       Runtime: "nodejs12.x",
       MemorySize: 128,
       Timeout: 900,
-    }));
-    expectCDK(stack).to(haveResource("AWS::IAM::Policy", {
+    });
+
+    Template.fromStack(stack).hasResourceProperties("AWS::IAM::Policy", {
       PolicyName: "DomainIdentityDomainIdentityRequestorFunctionServiceRoleDefaultPolicy9D23D5BE",
       Roles: [
         {
@@ -85,7 +86,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
           },
         ],
       },
-    }));
+    });
   });
 
   it("adds validation error on domain mismatch", () => {
@@ -101,7 +102,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
       hostedZone: helloDotComZone,
     });
 
-    expect(() => SynthUtils.synthesize(stack))
+    expect(() => Template.fromStack(stack))
       .toThrow(/DNS zone hello.com is not authoritative for SES identity domain name example.com/);
   });
 
@@ -118,7 +119,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
       hostedZone: helloDotComZone,
     });
 
-    expect(() => SynthUtils.synthesize(stack)).not.toThrow();
+    expect(() => Template.fromStack(stack)).not.toThrow();
   });
 
   it("works with imported zone", () => {
@@ -139,7 +140,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
     });
 
     // THEN
-    expectCDK(stack).to(haveResource("AWS::CloudFormation::CustomResource", {
+    Template.fromStack(stack).hasResourceProperties("AWS::CloudFormation::CustomResource", {
       ServiceToken: {
         "Fn::GetAtt": [
           "DomainIdentityDomainIdentityRequestorFunction700A5CBC",
@@ -148,7 +149,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
       },
       DomainName: "mydomain.com",
       HostedZoneId: "DUMMY",
-    }));
+    });
   });
 
   it("works with imported role", () => {
@@ -171,8 +172,8 @@ describe(DnsValidatedDomainIdentity.name, () => {
     });
 
     // THEN
-    expectCDK(stack).to(haveResource("AWS::Lambda::Function", {
+    Template.fromStack(stack).hasResourceProperties("AWS::Lambda::Function", {
       Role: "arn:aws:iam::account-id:role/role-name",
-    }));
+    });
   });
 });

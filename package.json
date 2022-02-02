@@ -1,27 +1,22 @@
 {
   "name": "aws-cdk-ses-domain-identity",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Constructs for provisioning and referencing domain identities which can be used in SES RuleSets and Actions Construct.",
   "main": "dist/dns-validated-domain-identity.js",
   "types": "dist/dns-validated-domain-identity.d.ts",
   "dependencies": {},
   "peerDependencies": {
-    "@aws-cdk/aws-iam": "^1.98.0",
-    "@aws-cdk/aws-lambda": "^1.98.0",
-    "@aws-cdk/aws-route53": "^1.98.0",
-    "@aws-cdk/core": "^1.98.0"
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.142.0",
-    "@aws-cdk/aws-iam": "1.142.0",
-    "@aws-cdk/aws-lambda": "1.142.0",
-    "@aws-cdk/aws-route53": "1.142.0",
-    "@aws-cdk/core": "1.142.0",
     "@prescott/commitlint-preset": "1.0.3",
     "@prescott/semantic-release-config": "1.0.1",
     "@prescott/tslint-preset": "1.0.1",
     "@types/jest": "27.4.0",
     "@types/node": "12.20.43",
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0",
     "husky": "7.0.4",
     "jest": "27.4.7",
     "semantic-release": "19.0.2",

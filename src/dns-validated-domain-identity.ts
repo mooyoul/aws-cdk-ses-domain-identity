@@ -1,7 +1,8 @@
-import * as iam from "@aws-cdk/aws-iam";
-import * as lambda from "@aws-cdk/aws-lambda";
-import * as route53 from "@aws-cdk/aws-route53";
-import * as cdk from "@aws-cdk/core";
+import {CustomResource, Duration, Resource, Stack, Token} from "aws-cdk-lib";
+import * as iam from "aws-cdk-lib/aws-iam";
+import * as lambda from "aws-cdk-lib/aws-lambda";
+import * as route53 from "aws-cdk-lib/aws-route53";
+import {Construct} from "constructs";
 import * as path from "path";
 
 /**
@@ -47,13 +48,13 @@ export interface DnsValidatedDomainIdentityProps {
  * A domain identity managed by AWS SES.  Will be automatically
  * validated using DNS validation against the specified Route 53 hosted zone.
  */
-export class DnsValidatedDomainIdentity extends cdk.Resource {
+export class DnsValidatedDomainIdentity extends Resource {
   public readonly domainName: string;
   public readonly dkim: boolean;
   private readonly hostedZoneId: string;
   private readonly normalizedZoneName: string;
 
-  public constructor(scope: cdk.Construct, id: string, props: DnsValidatedDomainIdentityProps) {
+  public constructor(scope: Construct, id: string, props: DnsValidatedDomainIdentityProps) {
     super(scope, id);
 
     this.domainName = props.domainName;
@@ -72,7 +73,7 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
       handler: "index.identityRequestHandler",
       runtime: lambda.Runtime.NODEJS_12_X,
       memorySize: 128,
-      timeout: cdk.Duration.minutes(15),
+      timeout: Duration.minutes(15),
       role: props.customResourceRole,
     });
     requestorFunction.addToRolePolicy(new iam.PolicyStatement({
@@ -96,10 +97,10 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
           "route53:changeResourceRecordSets",
           "route53:ListResourceRecordSets",
       ],
-      resources: [`arn:${cdk.Stack.of(requestorFunction).partition}:route53:::hostedzone/${this.hostedZoneId}`],
+      resources: [`arn:${Stack.of(requestorFunction).partition}:route53:::hostedzone/${this.hostedZoneId}`],
     }));
 
-    const identity = new cdk.CustomResource(this, "IdentityRequestorResource", {
+    const identity = new CustomResource(this, "IdentityRequestorResource", {
       serviceToken: requestorFunction.functionArn,
       properties: {
         DomainName: props.domainName,
@@ -108,17 +109,20 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
         DKIM: props.dkim,
       },
     });
-  }
 
-  protected validate(): string[] {
-    const errors: string[] = [];
-    // Ensure the zone name is a parent zone of the certificate domain name
-    if (!cdk.Token.isUnresolved(this.normalizedZoneName) &&
-              this.domainName !== this.normalizedZoneName &&
-              !this.domainName.endsWith("." + this.normalizedZoneName)) {
-      errors.push(`DNS zone ${this.normalizedZoneName} is not authoritative for SES identity domain name ${this.domainName}`);
-    }
+    const _this = this;
+    this.node.addValidation({
+      validate(): string[] {
+        const errors: string[] = [];
+        // Ensure the zone name is a parent zone of the certificate domain name
+        if (!Token.isUnresolved(_this.normalizedZoneName) &&
+            _this.domainName !== _this.normalizedZoneName &&
+            !_this.domainName.endsWith("." + _this.normalizedZoneName)) {
+          errors.push(`DNS zone ${_this.normalizedZoneName} is not authoritative for SES identity domain name ${_this.domainName}`);
+        }
 
-    return errors;
+        return errors;
+      },
+    });
   }
 }
