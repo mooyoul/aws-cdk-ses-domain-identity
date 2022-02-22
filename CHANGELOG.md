@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.6...v1.1.0) (2022-02-22)
+
+
+### Features
+
+* add `identityArn` property ([6c1b938](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/6c1b938a61feba472c22b3336cc9de5e7f1f2894)), closes [#8](https://github.com/mooyoul/aws-cdk-ses-domain-identity/issues/8)
+* update requestor function to use Node.js 14 ([71decd1](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/71decd18c9529f3c046038dee295d7da7e4f8288))
+
 ## [1.0.6](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.5...v1.0.6) (2021-09-30)
 
 
