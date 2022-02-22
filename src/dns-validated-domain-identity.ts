@@ -118,15 +118,14 @@ export class DnsValidatedDomainIdentity extends Resource {
       },
     });
 
-    const _this = this;
     this.node.addValidation({
-      validate(): string[] {
+      validate: (): string[] => {
         const errors: string[] = [];
         // Ensure the zone name is a parent zone of the certificate domain name
-        if (!Token.isUnresolved(_this.normalizedZoneName) &&
-            _this.domainName !== _this.normalizedZoneName &&
-            !_this.domainName.endsWith("." + _this.normalizedZoneName)) {
-          errors.push(`DNS zone ${_this.normalizedZoneName} is not authoritative for SES identity domain name ${_this.domainName}`);
+        if (!Token.isUnresolved(this.normalizedZoneName) &&
+          this.domainName !== this.normalizedZoneName &&
+          !this.domainName.endsWith("." + this.normalizedZoneName)) {
+          errors.push(`DNS zone ${this.normalizedZoneName} is not authoritative for SES identity domain name ${this.domainName}`);
         }
 
         return errors;
