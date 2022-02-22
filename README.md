@@ -13,6 +13,17 @@ This package automatically validates SES Domain Identity like `aws-cdk-lib/aws-c
 
 -----
 
+## About CDK Compatibility
+
+Now `aws-cdk-ses-domain-identity` has been migrated to CDK v2.
+The major version of `aws-cdk-ses-domain-identity` matches to compatible CDK version.
+
+- For CDK v1 users: Use 1.x.x version
+  - `npm i aws-cdk-ses-domain-identity@1 --save` 
+- For CDK v2 users: Use 2.x.x version
+  - `npm i aws-cdk-ses-domain-identity@latest --save`
+  - or `npm i aws-cdk-ses-domain-identity@2 --save`
+
 ## Example
 
 ```typescript
