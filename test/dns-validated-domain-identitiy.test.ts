@@ -175,4 +175,22 @@ describe(DnsValidatedDomainIdentity.name, () => {
       Role: "arn:aws:iam::account-id:role/role-name",
     }));
   });
+
+  it("exposes properties related to identity", () => {
+    const app = new App();
+    const stack = new Stack(app, "Stack", {
+      env: { account: "12345678", region: "us-blue-5" },
+    });
+
+    const helloDotComZone = new PublicHostedZone(stack, "HelloDotCom", {
+      zoneName: "example.com",
+    });
+
+    const identity = new DnsValidatedDomainIdentity(stack, "DomainIdentity", {
+      domainName: "test.example.com",
+      hostedZone: helloDotComZone,
+    });
+
+    expect(identity.identityArn).toEqual("arn:aws:ses:us-blue-5:12345678:identity/test.example.com");
+  });
 });

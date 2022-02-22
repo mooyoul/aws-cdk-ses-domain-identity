@@ -50,14 +50,22 @@ export interface DnsValidatedDomainIdentityProps {
 export class DnsValidatedDomainIdentity extends cdk.Resource {
   public readonly domainName: string;
   public readonly dkim: boolean;
+  public readonly identityArn: string;
+
   private readonly hostedZoneId: string;
   private readonly normalizedZoneName: string;
 
   public constructor(scope: cdk.Construct, id: string, props: DnsValidatedDomainIdentityProps) {
     super(scope, id);
 
+    const stack = cdk.Stack.of(this);
+
+    const region = props.region ?? stack.region;
+    const accountId = stack.account;
+
     this.domainName = props.domainName;
     this.dkim = props.dkim ?? false;
+    this.identityArn = `arn:aws:ses:${region}:${accountId}:identity/${this.domainName}`;
     this.normalizedZoneName = props.hostedZone.zoneName;
     // Remove trailing `.` from zone name
     if (this.normalizedZoneName.endsWith(".")) {
@@ -102,9 +110,9 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
     const identity = new cdk.CustomResource(this, "IdentityRequestorResource", {
       serviceToken: requestorFunction.functionArn,
       properties: {
-        DomainName: props.domainName,
+        DomainName: this.domainName,
         HostedZoneId: this.hostedZoneId,
-        Region: props.region,
+        Region: region,
         DKIM: props.dkim,
       },
     });

@@ -34,10 +34,17 @@ import { DnsValidatedDomainIdentity } from "aws-cdk-ses-domain-identity";
 // ... (truncated)
 ```
 
+## Constructs
 
-## Structures
+### DnsValidatedDomainIdentity
 
-#### DnsValidatedDomainIdentityProps
+#### Initializer
+
+```typescript
+new DnsValidatedDomainIdentity(scope: Construct, id: string, props?: DnsValidatedDomainIdentityProps)
+```
+
+#### Construct Props
 
 ```typescript
 interface DnsValidatedDomainIdentityProps {
@@ -74,6 +81,12 @@ interface DnsValidatedDomainIdentityProps {
   readonly customResourceRole?: iam.IRole;
 }
 ```
+
+#### Properties
+
+| Name        | Type   | Description                     |
+|-------------|--------|---------------------------------|
+| identityArn | string | The ARN of the domain identity. |
 
 
 ## License
