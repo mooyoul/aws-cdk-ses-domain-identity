@@ -1,3 +1,15 @@
+# [2.0.0](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.1.0...v2.0.0) (2022-02-22)
+
+
+### Features
+
+* migrate to CDK v2 ([c01e581](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/c01e581d2fbf0ddb58f4e90dbb67ef644d0097bc)), closes [#37](https://github.com/mooyoul/aws-cdk-ses-domain-identity/issues/37)
+
+
+### BREAKING CHANGES
+
+* Requires CDK v2
+
 # [1.1.0](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.0.6...v1.1.0) (2022-02-22)
 
 
