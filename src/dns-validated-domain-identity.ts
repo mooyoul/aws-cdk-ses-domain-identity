@@ -78,7 +78,7 @@ export class DnsValidatedDomainIdentity extends cdk.Resource {
     const requestorFunction = new lambda.Function(this, "DomainIdentityRequestorFunction", {
       code: lambda.Code.fromAsset(path.resolve(__dirname, "..", "lambda-packages", "dns-validated-domain-identity-handler", "dist")),
       handler: "index.identityRequestHandler",
-      runtime: lambda.Runtime.NODEJS_12_X,
+      runtime: lambda.Runtime.NODEJS_14_X,
       memorySize: 128,
       timeout: cdk.Duration.minutes(15),
       role: props.customResourceRole,

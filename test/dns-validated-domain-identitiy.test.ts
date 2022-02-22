@@ -33,7 +33,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
     }));
     expectCDK(stack).to(haveResource("AWS::Lambda::Function", {
       Handler: "index.identityRequestHandler",
-      Runtime: "nodejs12.x",
+      Runtime: "nodejs14.x",
       MemorySize: 128,
       Timeout: 900,
     }));
