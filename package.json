@@ -18,7 +18,7 @@
     "aws-cdk-lib": "2.23.0",
     "constructs": "10.1.1",
     "husky": "7.0.4",
-    "jest": "28.0.3",
+    "jest": "28.1.0",
     "semantic-release": "19.0.2",
     "ts-jest": "28.0.1",
     "ts-node": "10.7.0",
