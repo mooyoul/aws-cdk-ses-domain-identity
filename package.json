@@ -16,7 +16,7 @@
     "@types/jest": "29.2.5",
     "@types/node": "14.18.12",
     "aws-cdk-lib": "2.58.1",
-    "constructs": "10.1.204",
+    "constructs": "10.1.205",
     "husky": "8.0.2",
     "jest": "29.3.1",
     "semantic-release": "19.0.5",
