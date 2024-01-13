@@ -4,7 +4,6 @@
   "description": "Constructs for provisioning and referencing domain identities which can be used in SES RuleSets and Actions Construct.",
   "main": "dist/dns-validated-domain-identity.js",
   "types": "dist/dns-validated-domain-identity.d.ts",
-  "dependencies": {},
   "peerDependencies": {
     "aws-cdk-lib": "^2.0.0",
     "constructs": "^10.0.0"
@@ -23,9 +22,10 @@
     "ts-jest": "29.1.1",
     "ts-node": "10.9.2",
     "tslint": "6.1.3",
-    "typescript": "4.8.4"
+    "typescript": "^5.3.3"
   },
   "scripts": {
+    "prepare": "husky install",
     "clean": "rm -rf dist",
     "prebuild": "npm run clean",
     "build": "tsc -p tsconfig.json",
@@ -55,14 +55,14 @@
       "path": "cz-conventional-changelog"
     }
   },
-  "husky": {
-    "hooks": {
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
   "commitlint": {
     "extends": [
       "@prescott/commitlint-preset"
     ]
+  },
+  "overrides": {
+    "@prescott/tslint-preset": {
+      "typescript": "$typescript"
+    }
   }
 }
