@@ -33,7 +33,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
 
     Template.fromStack(stack).hasResourceProperties("AWS::Lambda::Function", {
       Handler: "index.identityRequestHandler",
-      Runtime: "nodejs14.x",
+      Runtime: "nodejs20.x",
       MemorySize: 128,
       Timeout: 900,
     });
