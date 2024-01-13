@@ -1,3 +1,15 @@
+# [2.2.0](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v2.1.0...v2.2.0) (2024-01-13)
+
+
+### Bug Fixes
+
+* **release:** bypass commitlint hooks to prevent publish failure ([31f3f13](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/31f3f1334bb8321ea8a55822aa9874a9ffd741d1))
+
+
+### Features
+
+* update to Node.js v20 ([#82](https://github.com/mooyoul/aws-cdk-ses-domain-identity/issues/82)) ([dbb14bb](https://github.com/mooyoul/aws-cdk-ses-domain-identity/commit/dbb14bbb202f325717879567822915d8a88d0159))
+
 # [2.0.0](https://github.com/mooyoul/aws-cdk-ses-domain-identity/compare/v1.1.0...v2.0.0) (2022-02-22)
 
 
