@@ -79,7 +79,7 @@ export class DnsValidatedDomainIdentity extends Resource {
     const requestorFunction = new lambda.Function(this, "DomainIdentityRequestorFunction", {
       code: lambda.Code.fromAsset(path.resolve(__dirname, "..", "lambda-packages", "dns-validated-domain-identity-handler", "dist")),
       handler: "index.identityRequestHandler",
-      runtime: lambda.Runtime.NODEJS_14_X,
+      runtime: lambda.Runtime.NODEJS_20_X,
       memorySize: 128,
       timeout: Duration.minutes(15),
       role: props.customResourceRole,
