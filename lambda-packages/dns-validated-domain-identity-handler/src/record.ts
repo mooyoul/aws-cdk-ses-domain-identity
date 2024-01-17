@@ -1,4 +1,4 @@
-import type { Change, ResourceRecord, ResourceRecordSet } from "aws-sdk/clients/route53";
+import type { Change, ResourceRecord, ResourceRecordSet } from "@aws-sdk/client-route-53";
 
 const DEFAULT_VERIFICATION_RECORD_TTL = 1800; // 30 minutes
 
@@ -19,15 +19,15 @@ export class Record {
     switch (resource.Type) {
       case "CNAME":
         return new this(
-          resource.Name,
+          resource.Name!,
           resource.Type,
-          new Set(resource.ResourceRecords!.map((record) => record.Value)),
+          new Set(resource.ResourceRecords!.map((record) => record.Value!)),
         );
       case "TXT":
         return new this(
-          resource.Name,
+          resource.Name!,
           resource.Type,
-          new Set(resource.ResourceRecords!.map((record) => JSON.parse(record.Value))),
+          new Set(resource.ResourceRecords!.map((record) => JSON.parse(record.Value!))),
         );
       default:
         throw new Error("Unsupported ResourceRecord Type");
