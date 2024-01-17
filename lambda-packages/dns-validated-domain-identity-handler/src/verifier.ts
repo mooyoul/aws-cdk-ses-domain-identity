@@ -1,7 +1,8 @@
-import { Change, ChangeResourceRecordSetsCommand, ListResourceRecordSetsCommand, Route53Client, waitUntilResourceRecordSetsChanged } from "@aws-sdk/client-route-53";
-import { DeleteIdentityCommand, GetIdentityDkimAttributesCommand, GetIdentityVerificationAttributesCommand, SESClient, SetIdentityDkimEnabledCommand, VerifyDomainDkimCommand, VerifyDomainIdentityCommand, waitUntilIdentityExists } from "@aws-sdk/client-ses";
+import { Change, ChangeResourceRecordSetsCommand, ListResourceRecordSetsCommand, Route53Client } from "@aws-sdk/client-route-53";
+import { DeleteIdentityCommand, GetIdentityDkimAttributesCommand, GetIdentityVerificationAttributesCommand, SESClient, SetIdentityDkimEnabledCommand, VerifyDomainDkimCommand, VerifyDomainIdentityCommand } from "@aws-sdk/client-ses";
 import { Record } from "./record";
 import { waitFor } from "./util";
+import { waitUntil } from "./wait";
 
 type CFNCustomResourceProps = {
   [key: string]: any;
@@ -217,7 +218,7 @@ export class Verifier {
     changeId: string,
     wait: Wait = DEFAULT_WAIT,
   ) {
-    await waitUntilResourceRecordSetsChanged({
+    await waitUntil.resourceRecordSetsChanged({
       client: this.route53,
       maxDelay: wait.delay,
       maxWaitTime: wait.delay * wait.maxAttempts
@@ -227,11 +228,11 @@ export class Verifier {
   private async waitForIdentityVerified(
     wait: Wait = DEFAULT_WAIT,
   ) {
-    await waitUntilIdentityExists(
+    await waitUntil.identityExists(
       {
         client: this.ses,
+        maxDelay: wait.delay,
         maxWaitTime: wait.delay * wait.maxAttempts,
-        maxDelay: wait.delay
       },
       { Identities: [this.domainName] }
     )
