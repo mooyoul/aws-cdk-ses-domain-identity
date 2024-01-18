@@ -1,7 +1,7 @@
 import * as sinon from "sinon";
 
-import * as Route53 from "aws-sdk/clients/route53";
-import * as SES from "aws-sdk/clients/ses";
+import Route53 from "aws-sdk/clients/route53";
+import SES from "aws-sdk/clients/ses";
 import { sandbox, stubAWSAPI } from "./helper";
 
 import { Verifier } from "../src/verifier";
