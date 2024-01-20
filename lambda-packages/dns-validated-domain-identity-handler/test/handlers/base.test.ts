@@ -1,5 +1,5 @@
 import { CloudFormationCustomResourceEvent } from "aws-lambda";
-import * as nock from "nock";
+import nock from "nock";
 
 import { sandbox } from "../helper";
 

@@ -1,13 +1,16 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "es2020",
         "target": "es2019",
+        "moduleResolution": "Bundler",
         "rootDir": "src",
         "outDir": "dist",
         "noImplicitAny": true,
         "declaration": true,
         "sourceMap": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true
     },
     "include": [
         "src/**/*.ts"
