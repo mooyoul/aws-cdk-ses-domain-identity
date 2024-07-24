@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "devDependencies": {
     "@prescott/tslint-preset": "1.0.1",
-    "@types/aws-lambda": "8.10.141",
+    "@types/aws-lambda": "8.10.142",
     "@types/jest": "29.5.12",
     "@types/nock": "11.1.0",
     "@types/node": "^20.11.0",
