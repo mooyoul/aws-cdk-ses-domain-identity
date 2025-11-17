@@ -10,7 +10,7 @@
     "@types/jest": "30.0.0",
     "@types/nock": "11.1.0",
     "@types/node": "^20.11.0",
-    "@types/sinon": "20.0.0",
+    "@types/sinon": "21.0.0",
     "aws-sdk": "2.1692.0",
     "jest": "30.2.0",
     "nock": "14.0.10",
