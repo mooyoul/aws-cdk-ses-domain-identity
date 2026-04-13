@@ -14,7 +14,7 @@
     "@prescott/tslint-preset": "1.0.1",
     "@types/jest": "30.0.0",
     "@types/node": "^20.11.0",
-    "aws-cdk-lib": "2.248.0",
+    "aws-cdk-lib": "2.249.0",
     "constructs": "10.6.0",
     "husky": "9.1.7",
     "jest": "30.3.0",
