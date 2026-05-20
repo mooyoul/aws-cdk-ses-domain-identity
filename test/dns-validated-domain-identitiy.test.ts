@@ -68,7 +68,7 @@ describe(DnsValidatedDomainIdentity.name, () => {
           },
           {
             Action: [
-              "route53:changeResourceRecordSets",
+              "route53:ChangeResourceRecordSets",
               "route53:ListResourceRecordSets",
             ],
             Effect: "Allow",
