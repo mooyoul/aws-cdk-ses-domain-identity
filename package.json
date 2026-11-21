@@ -18,7 +18,7 @@
     "constructs": "10.8.1",
     "husky": "9.1.7",
     "jest": "30.5.2",
-    "semantic-release": "25.0.9",
+    "semantic-release": "26.0.1",
     "ts-jest": "29.4.15",
     "ts-node": "10.9.2",
     "tslint": "6.1.3",
