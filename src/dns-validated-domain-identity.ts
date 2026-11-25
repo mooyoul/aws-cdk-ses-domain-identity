@@ -102,7 +102,7 @@ export class DnsValidatedDomainIdentity extends Resource {
     }));
     requestorFunction.addToRolePolicy(new iam.PolicyStatement({
       actions: [
-          "route53:changeResourceRecordSets",
+          "route53:ChangeResourceRecordSets",
           "route53:ListResourceRecordSets",
       ],
       resources: [`arn:${Stack.of(requestorFunction).partition}:route53:::hostedzone/${this.hostedZoneId}`],
